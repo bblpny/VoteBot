@@ -10,9 +10,6 @@ const command_info = {
 };
 
 
-function get_avatar_url(user){
-    return user.avatarURL || user.defaultAvatarURL;
-}
 module.exports = Structure=>{
     class UserVote extends Structure.Prompt {
         
@@ -23,7 +20,7 @@ module.exports = Structure=>{
         constructor(situation,scope){
             super(situation,scope);
 
-            this.text = get_avatar_url(scope.user) + ' \n\n***Vote for '+scope.user+'***\n'+
+            this.text = Structure.getAvatarURL(scope.user) + ' \n\n***Vote for '+scope.user+'***\n'+
             '**Y** for yes\n'+
             '**N** for no\n'+
             '**P** for potato';
