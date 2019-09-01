@@ -8,12 +8,16 @@ module.exports = Discord=>{
 
     class Structure {
         
+        static createAttachment(args){
+            return new Discord.Attachment(args);
+        }
+
+        static createRichEmbed(args){
+            return new Discord.RichEmbed(args);
+        }
+
         static getAvatarURL(user, size){
             const input_url = user.avatarURL || user.defaultAvatarURL;
-
-            if (!(size)){
-                size = 256;
-            }
 
 
             if(input_url && size){

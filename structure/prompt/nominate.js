@@ -34,9 +34,13 @@ module.exports = (Structure,Prompts)=>{
             res.author.send('Success!');
 
             this.situation.req.channel.send(
-                Structure.getAvatarURL(this.user_found) + '\n\n' +
-                this.user_found + '('+this.user_found.tag+') has been nominated by ' +
-                this.situation.author);
+                Structure.createRichEmbed()
+                .setColor('#0099ff')
+                .setTitle('Vote for '+this.user_found.tag)
+                .setThumbnail(Structure.getAvatarURL(this.user_found))
+                .setDescription(this.user_found + ' was nominated by '+this.situation.author)
+                .setFooter('type !vote')
+                );
 
             this.situation.set_prompt(null, res);
         }

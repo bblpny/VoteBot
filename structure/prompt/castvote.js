@@ -20,10 +20,16 @@ module.exports = Structure=>{
         constructor(situation,scope){
             super(situation,scope);
 
-            this.text = Structure.getAvatarURL(scope.user) + ' \n\n***Vote for '+scope.user+'***\n'+
+            this.text = Structure.createRichEmbed()
+              .setColor('#0099ff')
+              .setTitle('Vote for '+scope.user.tag)
+              .setThumbnail(Structure.getAvatarURL(scope.user))
+              .setDescription(
             '**Y** for yes\n'+
             '**N** for no\n'+
-            '**P** for potato';
+            '**P** for potato\n' +
+            '*profile can be found here* :' + scope.user)
+              .setFooter('go ahead');
 
             this.user = scope.user;
         }

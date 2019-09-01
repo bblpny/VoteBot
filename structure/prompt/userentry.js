@@ -98,17 +98,19 @@ module.exports = Structure=>{
                     
                     let error_code = that.check_user_is_valid();
 
-                    if(null == error_code ){
-                        error_code = "\ntype **OK** to submit nomination OR type another user.";
-                    }else{
+                    if(null != error_code ){
                         that.user_found = restore_user;
                     }
 
                     state.req.author.send(
-                        Structure.getAvatarURL(found) + 
-                        '\n\nFound user:' +
-                        found + '('+found.tag+')'+
-                        error_code
+                        Structure.createRichEmbed()
+                        .setColor('#0099ff')
+                        .setTitle('Found '+found.tag)
+                        .setThumbnail(Structure.getAvatarURL(found))
+                        .setDescription('' + found + ' ' + 
+                            ((error_code && ('cannot be selected! Enter another user.'))||'successfully.')
+                            )
+                        .setFooter(error_code || 'type OK to confirm or enter another user id.')
                     );
                 })
                 .catch(err=>{
